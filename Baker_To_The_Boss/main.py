@@ -1,5 +1,6 @@
 import pygame
 import os
+pygame.font.init()
 
 WIDTH, HEIGHT = 800, 600 ## size of game window
 WIN = pygame.display.set_mode((WIDTH, HEIGHT)) # ???
@@ -11,6 +12,9 @@ RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 
 BORDER = pygame.Rect(WIDTH, 0, 10, HEIGHT) # draws a long thin rectangle... not in use right now
+
+HEALTH_FONT = pygame.font.SysFont('comicsans', 40)
+WINNER_FONT = pygame.font.SysFont('comicsans', 100)
 
 FPS = 60 #set FPS
 VELOCITY = 5 #set velocity
@@ -33,12 +37,21 @@ MAIL_PROJECTILE = pygame.transform.scale(MAIL_IMAGE, (BAKER_WIDTH, BAKER_HEIGHT)
 MOB_BOSS_IMAGE = pygame.image.load(os.path.join('Assets', 'mob_boss.png')) #load mob_boss image
 MOB_BOSS = pygame.transform.scale(MOB_BOSS_IMAGE, (MOB_BOSS_WIDTH, MOB_BOSS_HEIGHT))
 
-def draw_window(baker, mob_boss, mail_projectiles):
+FLOOR = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'brick_wall_tile.png')), (WIDTH, HEIGHT))
+
+def draw_window(baker, mob_boss, mail_projectiles, baker_health, mob_boss_health):
     WIN.fill(WHITE) ##background color
+    WIN.blit(FLOOR, (0, 0))
+    
+    baker_health_text = HEALTH_FONT.render("Health: " + str(baker_health), 1, WHITE)
+    mob_boss_health_text = HEALTH_FONT.render("Health: " + str(mob_boss_health), 1, WHITE)
+    WIN.blit(baker_health_text, (10, 10))
+    WIN.blit(mob_boss_health_text, (WIDTH - mob_boss_health_text.get_width() - 10, 10))
+
     # pygame.draw.rect(WIN, BLACK, BORDER) // not in use right now
     WIN.blit(BAKER, (baker.x, baker.y)) #place + position baker image
     WIN.blit(MOB_BOSS, (mob_boss.x, mob_boss.y))
-    WIN.blit(MAIL_PROJECTILE, (0, 0))
+    ## WIN.blit(MAIL_PROJECTILE, (0, 0))
 
     for mail_bullet in mail_projectiles:
         pygame.draw.rect(WIN, RED, mail_bullet)
@@ -67,14 +80,24 @@ def handle_projectiles(mail_projectiles, baker, mob_boss): #projectile function
         if mob_boss.colliderect(mail_bullet):
             pygame.event.post(pygame.event.Event(MOB_BOSS_HIT))
             mail_projectiles.remove(mail_bullet)
-        if mail_bullet.x > WIDTH:
+        elif mail_bullet.x > WIDTH:
             mail_projectiles.remove(mail_bullet)
+
+def draw_winner(text):
+    draw_text = WINNER_FONT.render(text, 1, WHITE)
+    WIN.blit(draw_text, (WIDTH//2 - draw_text.get_width()/2, HEIGHT/2 - draw_text.get_height()/2))
+    pygame.display.update()
+    pygame.time.delay(5000)
 
 def main():
     baker = pygame.Rect(100, 300, BAKER_WIDTH, BAKER_HEIGHT) #position baker
     mob_boss = pygame.Rect(300, 100, MOB_BOSS_WIDTH, MOB_BOSS_HEIGHT) #position mob_boss
 
     mail_projectiles = []
+
+    baker_health = 10
+
+    mob_boss_health = 10
 
     clock = pygame.time.Clock() # ???
     run = True
@@ -89,13 +112,31 @@ def main():
                     mail_bullet = pygame.Rect(baker.x + baker.width, baker.y + baker.height//2, 10, 5) ## creates projectile rectangle
                     mail_projectiles.append(mail_bullet)
 
+            if event.type == BAKER_HIT:
+                baker_health -= 1
+
+            if event.type == MOB_BOSS_HIT:
+                mob_boss_health -= 1
+
+        winner_text = ""
+        if baker_health <= 0:
+            winner_text = "Mob Boss Wins!"
+
+        if mob_boss_health <= 0:
+            winner_text = "Baker Wins!"
+
+            if winner_text != "":
+                draw_winner(winner_text)
+                break
+
+
 
         keys_pressed = pygame.key.get_pressed() #checks which keys are pressed
         baker_handle_movement(keys_pressed, baker)
 
         handle_projectiles(mail_projectiles, baker, mob_boss)
 
-        draw_window(baker, mob_boss, mail_projectiles)
+        draw_window(baker, mob_boss, mail_projectiles, baker_health, mob_boss_health)
 
     pygame.quit() # if run = false, close the game
 

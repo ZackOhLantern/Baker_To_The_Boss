@@ -23,6 +23,16 @@
   <ItemGroup>
     <Compile Include="main.py" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\baker.png" />
+    <Content Include="Assets\brick_wall_tile.png" />
+    <Content Include="Assets\mail_projectile.png" />
+    <Content Include="Assets\mob_boss.png" />
+    <Content Include="Assets\wood_floor_tile.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
        Visual Studio and specify your pre- and post-build commands in
