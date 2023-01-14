@@ -1,6 +1,7 @@
 import pygame
 import os
 pygame.font.init()
+pygame.mixer.init()
 
 WIDTH, HEIGHT = 800, 600 ## size of game window
 WIN = pygame.display.set_mode((WIDTH, HEIGHT)) # ???
@@ -12,6 +13,9 @@ RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 
 BORDER = pygame.Rect(WIDTH, 0, 10, HEIGHT) # draws a long thin rectangle... not in use right now
+
+MAIL_HIT_SOUND = pygame.mixer.Sound(os.path.join('Assets', 'mail_hit.mp3'))
+MAIL_THROW_SOUND = pygame.mixer.Sound(os.path.join('Assets', 'mail_throw.mp3'))
 
 HEALTH_FONT = pygame.font.SysFont('comicsans', 40)
 WINNER_FONT = pygame.font.SysFont('comicsans', 100)
@@ -111,12 +115,15 @@ def main():
                 if event.key == pygame.K_k and len(mail_projectiles) < MAX_PROJECTILE: # when K is pressed AND less than number of projectile on screen
                     mail_bullet = pygame.Rect(baker.x + baker.width, baker.y + baker.height//2, 10, 5) ## creates projectile rectangle
                     mail_projectiles.append(mail_bullet)
+                    MAIL_THROW_SOUND.play()
 
             if event.type == BAKER_HIT:
                 baker_health -= 1
+                MAIL_HIT_SOUND.play()
 
             if event.type == MOB_BOSS_HIT:
                 mob_boss_health -= 1
+                MAIL_HIT_SOUND.play()
 
         winner_text = ""
         if baker_health <= 0:
