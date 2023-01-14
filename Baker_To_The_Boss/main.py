@@ -17,13 +17,13 @@ BORDER = pygame.Rect(WIDTH, 0, 10, HEIGHT) # draws a long thin rectangle... not 
 MAIL_HIT_SOUND = pygame.mixer.Sound(os.path.join('Assets', 'mail_hit.mp3'))
 MAIL_THROW_SOUND = pygame.mixer.Sound(os.path.join('Assets', 'mail_throw.mp3'))
 
-HEALTH_FONT = pygame.font.SysFont('comicsans', 40)
-WINNER_FONT = pygame.font.SysFont('comicsans', 100)
+HEALTH_FONT = pygame.font.SysFont('fraktur', 40)
+WINNER_FONT = pygame.font.SysFont('fraktur', 100)
 
 FPS = 60 #set FPS
-VELOCITY = 5 #set velocity
-PROJECTILE_VELOCITY = 7.5 # set velocity for projectiles
-MAX_PROJECTILE = 5 # ammo amount
+VELOCITY = 3 #set velocity
+PROJECTILE_VELOCITY = 4 # set velocity for projectiles
+MAX_PROJECTILE = 25 # ammo amount
 
 BAKER_WIDTH, BAKER_HEIGHT = 64, 64
 MOB_BOSS_WIDTH, MOB_BOSS_HEIGHT = 64, 64
@@ -43,13 +43,13 @@ MOB_BOSS = pygame.transform.scale(MOB_BOSS_IMAGE, (MOB_BOSS_WIDTH, MOB_BOSS_HEIG
 
 FLOOR = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'brick_wall_tile.png')), (WIDTH, HEIGHT))
 
-def draw_window(baker, mob_boss, mail_projectiles, baker_health, mob_boss_health):
+def draw_window(baker, mob_boss, mail_projectiles, mob_boss_health):
     WIN.fill(WHITE) ##background color
     WIN.blit(FLOOR, (0, 0))
     
-    baker_health_text = HEALTH_FONT.render("Health: " + str(baker_health), 1, WHITE)
-    mob_boss_health_text = HEALTH_FONT.render("Health: " + str(mob_boss_health), 1, WHITE)
-    WIN.blit(baker_health_text, (10, 10))
+    ##baker_health_text = HEALTH_FONT.render("Health: " + str(baker_health), 1, WHITE)
+    mob_boss_health_text = HEALTH_FONT.render("Cupcakes Delivered: " + str(mob_boss_health), 1, WHITE)
+    ##WIN.blit(baker_health_text, (10, 10))
     WIN.blit(mob_boss_health_text, (WIDTH - mob_boss_health_text.get_width() - 10, 10))
 
     # pygame.draw.rect(WIN, BLACK, BORDER) // not in use right now
@@ -99,9 +99,9 @@ def main():
 
     mail_projectiles = []
 
-    baker_health = 10
+    ##baker_health = 10
 
-    mob_boss_health = 10
+    mob_boss_health = 0
 
     clock = pygame.time.Clock() # ???
     run = True
@@ -117,19 +117,19 @@ def main():
                     mail_projectiles.append(mail_bullet)
                     MAIL_THROW_SOUND.play()
 
-            if event.type == BAKER_HIT:
-                baker_health -= 1
-                MAIL_HIT_SOUND.play()
+            ##if event.type == BAKER_HIT:
+                ##baker_health -= 1
+                ##MAIL_HIT_SOUND.play()
 
             if event.type == MOB_BOSS_HIT:
-                mob_boss_health -= 1
+                mob_boss_health += 1
                 MAIL_HIT_SOUND.play()
 
-        winner_text = ""
-        if baker_health <= 0:
-            winner_text = "Mob Boss Wins!"
+        ##winner_text = ""
+        ##if baker_health <= 0:
+            ##winner_text = "Mob Boss Wins!"
 
-        if mob_boss_health <= 0:
+        if mob_boss_health > 25:
             winner_text = "Baker Wins!"
 
             if winner_text != "":
@@ -143,7 +143,7 @@ def main():
 
         handle_projectiles(mail_projectiles, baker, mob_boss)
 
-        draw_window(baker, mob_boss, mail_projectiles, baker_health, mob_boss_health)
+        draw_window(baker, mob_boss, mail_projectiles, mob_boss_health)
 
     pygame.quit() # if run = false, close the game
 
