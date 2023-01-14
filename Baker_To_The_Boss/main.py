@@ -13,6 +13,7 @@ BORDER = pygame.Rect(WIDTH, 0, 10, HEIGHT) # draws a long thin rectangle... not 
 FPS = 60 #set FPS
 VELOCITY = 5 #set velocity
 PROJECTILE_VELOCITY = 15 # set velocity for projectiles
+MAX_PROJECTILE = 15 # ammo amount
 
 BAKER_WIDTH, BAKER_HEIGHT = 64, 64
 MOB_BOSS_WIDTH, MOB_BOSS_HEIGHT = 64, 64
@@ -44,7 +45,7 @@ def main():
     baker = pygame.Rect(100, 300, BAKER_WIDTH, BAKER_HEIGHT) #position baker
     mob_boss = pygame.Rect(300, 100, MOB_BOSS_WIDTH, MOB_BOSS_HEIGHT) #position mob_boss
 
-    mail_projectile = []
+    mail_projectiles = []
 
     clock = pygame.time.Clock() # ???
     run = True
@@ -54,12 +55,12 @@ def main():
             if event.type == pygame.QUIT: #if click windows X close button
                 run = False
 
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_K:
-                    projectile = pygame.Rect(baker.x + baker.width, baker.y + baker.height/2, 10, 5)
-                    mail_projectile.append()
+            if event.type == pygame.KEYDOWN: # creating projectile system
+                if event.key == pygame.K_k and len(mail_projectiles) < MAX_PROJECTILE: # when K is pressed AND less than number of projectile on screen
+                    mail_bullet = pygame.Rect(baker.x + baker.width, baker.y + baker.height/2, 10, 5) ## creates projectile rectangle
+                    mail_projectiles.append(mail_bullet)
 
-
+        print(mail_projectiles)
         keys_pressed = pygame.key.get_pressed() #checks which keys are pressed
         baker_handle_movement(keys_pressed, baker)
 
