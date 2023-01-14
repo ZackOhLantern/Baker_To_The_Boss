@@ -14,8 +14,8 @@ BORDER = pygame.Rect(WIDTH, 0, 10, HEIGHT) # draws a long thin rectangle... not 
 
 FPS = 60 #set FPS
 VELOCITY = 5 #set velocity
-PROJECTILE_VELOCITY = 15 # set velocity for projectiles
-MAX_PROJECTILE = 10 # ammo amount
+PROJECTILE_VELOCITY = 7.5 # set velocity for projectiles
+MAX_PROJECTILE = 5 # ammo amount
 
 BAKER_WIDTH, BAKER_HEIGHT = 64, 64
 MOB_BOSS_WIDTH, MOB_BOSS_HEIGHT = 64, 64
@@ -26,8 +26,8 @@ MOB_BOSS_HIT = pygame.USEREVENT + 2
 BAKER_IMAGE = pygame.image.load(os.path.join('Assets', 'baker.png')) #load baker image
 BAKER = pygame.transform.scale(BAKER_IMAGE, (BAKER_WIDTH, BAKER_HEIGHT)) #set scale of image
 
-#MAIL_IMAGE = pygame.image.load(os.path.join('Assets', 'mail_projectile.png')) #load mail img
-#MAIL_PROJECTILE = pygame.transform.scale(MAIL_IMAGE, (BAKER_WIDTH, BAKER_HEIGHT)) #set scale of image
+MAIL_IMAGE = pygame.image.load(os.path.join('Assets', 'mail_projectile.png')) #load mail img
+MAIL_PROJECTILE = pygame.transform.scale(MAIL_IMAGE, (BAKER_WIDTH, BAKER_HEIGHT)) #set scale of image
 
 
 MOB_BOSS_IMAGE = pygame.image.load(os.path.join('Assets', 'mob_boss.png')) #load mob_boss image
@@ -38,6 +38,7 @@ def draw_window(baker, mob_boss, mail_projectiles):
     # pygame.draw.rect(WIN, BLACK, BORDER) // not in use right now
     WIN.blit(BAKER, (baker.x, baker.y)) #place + position baker image
     WIN.blit(MOB_BOSS, (mob_boss.x, mob_boss.y))
+    WIN.blit(MAIL_PROJECTILE, (0, 0))
 
     for mail_bullet in mail_projectiles:
         pygame.draw.rect(WIN, RED, mail_bullet)
@@ -65,6 +66,8 @@ def handle_projectiles(mail_projectiles, baker, mob_boss): #projectile function
         mail_bullet.x += PROJECTILE_VELOCITY
         if mob_boss.colliderect(mail_bullet):
             pygame.event.post(pygame.event.Event(MOB_BOSS_HIT))
+            mail_projectiles.remove(mail_bullet)
+        if mail_bullet.x > WIDTH:
             mail_projectiles.remove(mail_bullet)
 
 def main():
