@@ -184,53 +184,110 @@ def main():
     #vel_x = 1
     #vel_y = 1
 
-
     clock = pygame.time.Clock() # ???
     run = True
     start_time = pygame.time.get_ticks()
-  
 
-    for i in INTRO_LINES_1:
-        draw_intro_1(INTRO_TEXT_1[i], i)
-    pygame.time.delay(5000)
+    #clock.tick(FPS)
+     
+    reloop = 1
+    while reloop == 1:
+        for i in INTRO_LINES_1:
+            draw_intro_1(INTRO_TEXT_1[i], i)
+    
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    print("WTF")
+                    reloop = 2
+    
+    #intro_timer = pygame.time.get_ticks() 
+    #while (((pygame.time.get_ticks() - intro_timer) < 5000) and (event.key == pygame.K_SPACE)): #OR !(event.type == pygame.KEYDOWN)
+        #print(pygame.time.get_ticks)           
 
+  #  while True:
+   #     for event in pygame.event.get():
+   #         if event.type == pygame.KEYDOWN:
+  #              if event.key == pygame.K_SPACE:
+   #                 break
+   #             break
+   #         break
+        
     WIN.fill(BLACK)
 
-    for i in INTRO_LINES_2:
-        draw_intro_1(INTRO_TEXT_2[i], i)
-    pygame.time.delay(5000)
+    reloop = 1
+    while reloop == 1:
+        for i in INTRO_LINES_2:
+            draw_intro_1(INTRO_TEXT_2[i], i)
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    print("WTF")
+                    reloop = 2
 
     WIN.fill(BLACK)
+    reloop = 1
+    while reloop == 1:
 
-    for i in INTRO_LINES_3:
-        draw_intro_1(INTRO_TEXT_3[i], i)
-    pygame.time.delay(5000)
-
-    WIN.fill(BLACK)
-
-    for i in INTRO_LINES_4:
-        draw_intro_1(INTRO_TEXT_4[i], i)
-    pygame.time.delay(5000)
-
-    WIN.fill(BLACK)
-
-    for i in INTRO_LINES_5:
-        draw_intro_1(INTRO_TEXT_5[i], i)
-    pygame.time.delay(5000)
+        for i in INTRO_LINES_3:
+            draw_intro_1(INTRO_TEXT_3[i], i)
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    print("WTF")
+                    reloop = 2
 
     WIN.fill(BLACK)
+    reloop = 1
+    while reloop == 1:
 
-    for i in INTRO_LINES_6:
-        draw_intro_1(INTRO_TEXT_6[i], i)
-    pygame.time.delay(5000)
+        for i in INTRO_LINES_4:
+            draw_intro_1(INTRO_TEXT_4[i], i)
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    print("WTF")
+                    reloop = 2
 
     WIN.fill(BLACK)
+    reloop = 1
+    while reloop == 1:
 
-    for i in INTRO_LINES_7:
-        draw_intro_1(INTRO_TEXT_7[i], i)
-    pygame.time.delay(5000)
+        for i in INTRO_LINES_5:
+            draw_intro_1(INTRO_TEXT_5[i], i)
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    print("WTF")
+                    reloop = 2
+
+    WIN.fill(BLACK)
+    reloop = 1
+    while reloop == 1:
+
+        for i in INTRO_LINES_6:
+            draw_intro_1(INTRO_TEXT_6[i], i)
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    print("WTF")
+                    reloop = 2
+
+    WIN.fill(BLACK)
+    reloop = 1
+    while reloop == 1:
+
+        for i in INTRO_LINES_7:
+            draw_intro_1(INTRO_TEXT_7[i], i)
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    print("WTF")
+                    reloop = 2
+
 
     while run:
+
         clock.tick(FPS) # set FPS
         random_move = 0
 
