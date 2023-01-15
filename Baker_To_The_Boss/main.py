@@ -28,7 +28,7 @@ WINNER_FONT = pygame.font.SysFont('fraktur', 100)
 FPS = 60 #set FPS
 
 VELOCITY = 3 #set velocity
-##MOB_BOSS_VELOCITY = 1
+
 PROJECTILE_VELOCITY = 4 # set velocity for projectiles
 MAX_PROJECTILE = 3 # ammo amount
 
@@ -49,15 +49,10 @@ MOB_BOSS_IMAGE = pygame.image.load(os.path.join('Assets', 'mob_boss.png')) #load
 MOB_BOSS = pygame.transform.scale(MOB_BOSS_IMAGE, (MOB_BOSS_WIDTH, MOB_BOSS_HEIGHT))
 
 FLOOR = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'brick_wall_tile.png')), (WIDTH, HEIGHT))
-#global MOB_BOSS_VELOCITY
 
-#MOB_BOSS_VELOCITY = 1
-#global vel_x
-#global vel_y
 mob_velocity = 1
 
-#vel_x = mob_velocity*random.randrange(-1, 1, 1)
-#vel_y = mob_velocity*random.randrange(-1, 1, 1)
+
 vel_x = 1
 vel_y = 1
 
@@ -65,16 +60,16 @@ def draw_window(baker, mob_boss, mail_projectiles, mob_boss_health):
     WIN.fill(WHITE) ##background color
     WIN.blit(FLOOR, (0, 0))
     
-    ##baker_health_text = HEALTH_FONT.render("Health: " + str(baker_health), 1, WHITE)
+  
     mob_boss_health_text = HEALTH_FONT.render("Cupcakes Delivered: " + str(mob_boss_health), 1, WHITE)
-    ##WIN.blit(baker_health_text, (10, 10))
+ 
     WIN.blit(mob_boss_health_text, (WIDTH - mob_boss_health_text.get_width() - 10, 10))
 
-    ##pygame.draw.rect(WIN, BLACK, BORDER) 
+
 
     WIN.blit(BAKER, (baker.x, baker.y)) #place + position baker image
     WIN.blit(MOB_BOSS, (mob_boss.x, mob_boss.y))
-    ## WIN.blit(MAIL_PROJECTILE, (0, 0))
+
 
     for mail_bullet in mail_projectiles:
         pygame.draw.rect(WIN, RED, mail_bullet)
@@ -91,17 +86,10 @@ def baker_handle_movement(keys_pressed, baker): #function for baker movement
     if keys_pressed[pygame.K_d] and baker.x + VELOCITY < WIDTH: #D key pressed / RIGHT and boundary limit
         baker.x += VELOCITY
 
-#def mob_boss_handle_movement(mob_boss): #function for mob boss movement
-#        mob_boss.x += vel_x
- #       mob_boss.y += vel_y
+
 
 def mob_boss_directions(mob_boss, vel_x, vel_y, mob_velocity): #function for mob boss random movement
-    #mob_boss.x += vel_x
-    #mob_boss.y += vel_y
-    #if random_move == 1:
-       # mob_velocity += 1  
-       # vel_x = random.randrange(-1, 1, 1)
-      #  vel_y = random.randrange(-1, 1, 1)
+
         mob_boss.x += (mob_velocity * vel_x)
         mob_boss.y += (mob_velocity * vel_y)
         if mob_boss.x < -1:
@@ -172,26 +160,23 @@ def main():
 
     mail_projectiles = []
 
-    ##baker_health = 10
-    #vel_x = random.randrange(-1, 1, 1)
-    #vel_y = random.randrange(-1, 1, 1)
+
     mob_velocity = 1
     random_move = 0
 
     mob_boss_health = 0
     
-    #mob_velocity = 1
+
     vel_x = mob_velocity*random.randrange(-1, 1)
     vel_y = mob_velocity*random.randrange(-1, 1)
 
-    #vel_x = 1
-    #vel_y = 1
+
 
     clock = pygame.time.Clock() # ???
     run = True
     start_time = pygame.time.get_ticks()
 
-    #clock.tick(FPS)
+
      
     reloop = 1
     while reloop == 1:
@@ -202,18 +187,10 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     reloop = 2
-    
-    #intro_timer = pygame.time.get_ticks() 
-    #while (((pygame.time.get_ticks() - intro_timer) < 5000) and (event.key == pygame.K_SPACE)): #OR !(event.type == pygame.KEYDOWN)
-        #print(pygame.time.get_ticks)           
-
-  #  while True:
-   #     for event in pygame.event.get():
-   #         if event.type == pygame.KEYDOWN:
-  #              if event.key == pygame.K_SPACE:
-   #                 break
-   #             break
-   #         break
+        for event in pygame.event.get(): # check for close game
+            if event.type == pygame.QUIT: #if click windows X close button
+                pygame.quit()  
+            
         
     WIN.fill(BLACK)
 
@@ -225,6 +202,9 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     reloop = 2
+        for event in pygame.event.get(): # check for close game
+            if event.type == pygame.QUIT: #if click windows X close button
+                pygame.quit()  
 
     WIN.fill(BLACK)
     reloop = 1
@@ -237,6 +217,9 @@ def main():
                 if event.key == pygame.K_SPACE:
                     reloop = 2
 
+        for event in pygame.event.get(): # check for close game
+            if event.type == pygame.QUIT: #if click windows X close button
+                pygame.quit()  
     WIN.fill(BLACK)
     reloop = 1
     while reloop == 1:
@@ -247,6 +230,9 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     reloop = 2
+        for event in pygame.event.get(): # check for close game
+            if event.type == pygame.QUIT: #if click windows X close button
+                pygame.quit()  
 
     WIN.fill(BLACK)
     reloop = 1
@@ -258,6 +244,9 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     reloop = 2
+        for event in pygame.event.get(): # check for close game
+            if event.type == pygame.QUIT: #if click windows X close button
+                pygame.quit()  
 
     WIN.fill(BLACK)
     reloop = 1
@@ -269,6 +258,9 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     reloop = 2
+        for event in pygame.event.get(): # check for close game
+            if event.type == pygame.QUIT: #if click windows X close button
+                pygame.quit()   
 
     WIN.fill(BLACK)
     reloop = 1
@@ -280,6 +272,9 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     reloop = 2
+        for event in pygame.event.get(): # check for close game
+            if event.type == pygame.QUIT: #if click windows X close button
+                pygame.quit()   
 
     WIN.fill(BLACK)
     reloop = 1
@@ -292,6 +287,9 @@ def main():
                 if event.key == pygame.K_SPACE:
                     reloop = 2
 
+        for event in pygame.event.get(): # check for close game
+            if event.type == pygame.QUIT: #if click windows X close button
+                pygame.quit()   
 
     while run:
 
@@ -322,20 +320,13 @@ def main():
                     mail_projectiles.append(mail_bullet)
                     MAIL_THROW_SOUND.play()
 
-            ##if event.type == BAKER_HIT:
-                ##baker_health -= 1
-                ##MAIL_HIT_SOUND.play()
+
 
             if event.type == MOB_BOSS_HIT:
                 mob_boss_health += 1
                 MAIL_HIT_SOUND.play()
 
-        #mob_boss.x += vel_x
-        #mob_boss.y += vel_y
 
-        ##winner_text = ""
-        ##if baker_health <= 0:
-            ##winner_text = "Mob Boss Wins!"
 
         if mob_boss_health > 25:
             winner_text = "Baker Wins!"
@@ -349,7 +340,7 @@ def main():
         keys_pressed = pygame.key.get_pressed() #checks which keys are pressed
         baker_handle_movement(keys_pressed, baker)
         mob_boss_directions(mob_boss, vel_x, vel_y, mob_velocity)
-        #mob_boss_handle_movement(mob_boss)
+
 
         handle_projectiles(mail_projectiles, baker, mob_boss)
 
