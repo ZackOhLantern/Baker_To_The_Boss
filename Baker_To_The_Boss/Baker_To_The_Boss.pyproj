@@ -29,8 +29,15 @@
   <ItemGroup>
     <Content Include="Assets\baker.png" />
     <Content Include="Assets\brick_wall_tile.png" />
+    <Content Include="Assets\cupcake_logo.png" />
+    <Content Include="Assets\mail_hit.m4a" />
+    <Content Include="Assets\mail_hit.mp3" />
     <Content Include="Assets\mail_projectile.png" />
+    <Content Include="Assets\mail_throw.m4a" />
+    <Content Include="Assets\mail_throw.mp3" />
     <Content Include="Assets\mob_boss.png" />
+    <Content Include="Assets\projectile.png" />
+    <Content Include="Assets\wood_floor_tile - Copy.png" />
     <Content Include="Assets\wood_floor_tile.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
