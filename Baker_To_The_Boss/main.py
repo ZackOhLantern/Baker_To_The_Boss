@@ -1,5 +1,6 @@
 from re import X
 import pygame
+from pygame.locals import *
 import os
 import datetime
 import random
@@ -16,7 +17,7 @@ BLACK = (0, 0 ,0) #constant variable for color black
 RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 
-BORDER = pygame.Rect(WIDTH, 0, 10, HEIGHT) # draws a long thin rectangle... not in use right now
+BORDER = pygame.Rect(WIDTH, HEIGHT, 10, 10) # draws a long thin rectangle... not in use right now
 
 MAIL_HIT_SOUND = pygame.mixer.Sound(os.path.join('Assets', 'mail_hit.mp3'))
 MAIL_THROW_SOUND = pygame.mixer.Sound(os.path.join('Assets', 'mail_throw.mp3'))
@@ -69,7 +70,8 @@ def draw_window(baker, mob_boss, mail_projectiles, mob_boss_health):
     ##WIN.blit(baker_health_text, (10, 10))
     WIN.blit(mob_boss_health_text, (WIDTH - mob_boss_health_text.get_width() - 10, 10))
 
-    # pygame.draw.rect(WIN, BLACK, BORDER) // not in use right now
+    ##pygame.draw.rect(WIN, BLACK, BORDER) 
+
     WIN.blit(BAKER, (baker.x, baker.y)) #place + position baker image
     WIN.blit(MOB_BOSS, (mob_boss.x, mob_boss.y))
     ## WIN.blit(MAIL_PROJECTILE, (0, 0))
@@ -128,6 +130,33 @@ def handle_projectiles(mail_projectiles, baker, mob_boss): #projectile function
         elif mail_bullet.x > WIDTH:
             mail_projectiles.remove(mail_bullet)
 
+INTRO_TEXT_1 = ["A Cursed Family", "Chapter Three", "Baker to the Boss", "There's more to the story of our family...", "but this chapter is easier to stomach than most...", "Jameson was a baker.", "A good one, well-regarded, reasonably priced...", "       SPACE to continue..."]
+INTRO_LINES_1 = [0, 1, 2, 3, 4, 5, 6, 7]
+
+INTRO_TEXT_2 = ["There is a glass case, loaded with cakes,", " immaculately decorated. And donuts, tarts, pies.", "All presented with a keen eye and caring hand.", "On the walls are photos, Jameson with the mayor,", "Jameson standing in front of the bakery the day ", "he purchased it, Jameson and his young son, Andrew,", "Jameson with the first baked good he sold at ", "Jameson's Bakery, Andrew learning to use a whisk,", "Andrew's dog, Otis, eating an entire cake...", "       SPACE to continue..."]
+INTRO_LINES_2 = [0, 1, 2, 3, 4, 5, 6, 7 ,8, 9]
+
+INTRO_TEXT_3 = ["Jameson stands behind the counter, coated in flour, ", "kneading some dough, preparing a tray of rolls.", "A ruffian, hardened and scarred, enters. He slips a set", "of conjoined, spiked, brass rings onto", "his fingers and approaches the counter.", "'Youse da bakermin?'", "'I'm a baker, yes. My name is Jameson. How can I help you?'", "'See, word dun sez youse got da bes' cakes in town. Zat true?'", "A humble man, Jameson simply smiles and responds,", "       SPACE to continue..."]
+INTRO_LINES_3 = [0, 1, 2, 3, 4, 5, 6, 7 ,8, 9]
+
+INTRO_TEXT_4 = ["'I'm quite proud of my cakes, yes. I don't know about ", "the best, but I think they're quite good.'", "'My boss, see, he wants some cakes. But small-like, see'", "'Small... cakes. Bundt cakes?'", "'Smaller.'", "'Oh, I see. Pound cakes.'", "'Smaller!' The ruffian clenches his fist and raises it threateningly'", "'Hmm...'", "Ain't youse gawt some koinda cookie cuttas er sum'n'?", "       SPACE to continue..."]
+INTRO_LINES_4 = [0, 1, 2, 3, 4, 5, 6, 7 ,8, 9]
+
+INTRO_TEXT_5 = ["'Yes, of course. But I think what your boss is looking", " for is something that was always meant to be small,", "not a normal cake cut into smaller cakes, right?", "'Gawtta be hand held. Sweet. It's fer his dawta's tenth", "boithday, see? Can't nuttin' mess that up or ye'll be", "sleepin' wit' da fishes. Comprondor?'", "'...Yes?'", "'Gewd. All be back in a hwhile. If ye ain't gawtGewd. All be back in a hwhile. If ye ain't gawt", "twenty-five itty-bitty hand cakes, ye's gawta sing", "       SPACE to continue..."]
+INTRO_LINES_5 = [0, 1, 2, 3, 4, 5, 6, 7 ,8, 9]
+
+INTRO_TEXT_6 = ["da happy birfday song to his datta. Ova an' ova. Once", "fer each time ya din make a cake but shoulda.", "An' if yaw don'?' He raises his fist again.", "'I'z weal deck yer head clean off aye well.'", "The ruffian with an oddly shifting accent turns", "on his heel and leaves.", "The ruffian and his boss thought they invented", "cupcakes that day, but it was really Jameson. ", "He begins feverishly theory-crafting, prototyping,", "       SPACE to continue..."]
+INTRO_LINES_6 = [0, 1, 2, 3, 4, 5, 6, 7 ,8, 9]
+
+INTRO_TEXT_7 = ["and baking. Eventually, he finds his process, and using", "ramekins and pieces of parchment carefully cut into fluted circles, he", "begins the desperate task of saving his own life.", "Mercifully, when the ruffian returns, he knows it couldn't", "possibly have been enough time. Mercilessly, he", "returns with yet more instructions. Fortunately, Jameson has ", "anticipated this and prepared a batch of generic batter", "which he can flavor in many ways. Unfortunately,", "the ruffian is impatient and demanding in equal measure.", "       SPACE to continue..."]
+INTRO_LINES_7 = [0, 1, 2, 3, 4, 5, 6, 7 ,8, 9]
+
+def draw_intro_1(text, line):
+    draw_text = HEALTH_FONT.render(text, 1, WHITE)
+    WIN.blit(draw_text, (WIDTH//2 - draw_text.get_width()/2, (line+1)*50))
+    pygame.display.update()
+
+
 def draw_winner(text):
     draw_text = WINNER_FONT.render(text, 1, WHITE)
     WIN.blit(draw_text, (WIDTH//2 - draw_text.get_width()/2, HEIGHT/2 - draw_text.get_height()/2))
@@ -159,6 +188,47 @@ def main():
     clock = pygame.time.Clock() # ???
     run = True
     start_time = pygame.time.get_ticks()
+  
+
+    for i in INTRO_LINES_1:
+        draw_intro_1(INTRO_TEXT_1[i], i)
+    pygame.time.delay(5000)
+
+    WIN.fill(BLACK)
+
+    for i in INTRO_LINES_2:
+        draw_intro_1(INTRO_TEXT_2[i], i)
+    pygame.time.delay(5000)
+
+    WIN.fill(BLACK)
+
+    for i in INTRO_LINES_3:
+        draw_intro_1(INTRO_TEXT_3[i], i)
+    pygame.time.delay(5000)
+
+    WIN.fill(BLACK)
+
+    for i in INTRO_LINES_4:
+        draw_intro_1(INTRO_TEXT_4[i], i)
+    pygame.time.delay(5000)
+
+    WIN.fill(BLACK)
+
+    for i in INTRO_LINES_5:
+        draw_intro_1(INTRO_TEXT_5[i], i)
+    pygame.time.delay(5000)
+
+    WIN.fill(BLACK)
+
+    for i in INTRO_LINES_6:
+        draw_intro_1(INTRO_TEXT_6[i], i)
+    pygame.time.delay(5000)
+
+    WIN.fill(BLACK)
+
+    for i in INTRO_LINES_7:
+        draw_intro_1(INTRO_TEXT_7[i], i)
+    pygame.time.delay(5000)
 
     while run:
         clock.tick(FPS) # set FPS
