@@ -317,7 +317,7 @@ def main():
                 run = False
 
             if event.type == pygame.KEYDOWN: # creating projectile system
-                if event.key == pygame.K_k and len(mail_projectiles) < MAX_PROJECTILE: # when K is pressed AND less than number of projectile on screen
+                if event.key == pygame.K_SPACE and len(mail_projectiles) < MAX_PROJECTILE: # when K is pressed AND less than number of projectile on screen
                     mail_bullet = pygame.Rect(baker.x + baker.width, baker.y + baker.height//2, 10, 5) ## creates projectile rectangle
                     mail_projectiles.append(mail_bullet)
                     MAIL_THROW_SOUND.play()
