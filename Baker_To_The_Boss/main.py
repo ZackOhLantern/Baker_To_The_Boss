@@ -29,7 +29,7 @@ FPS = 60 #set FPS
 VELOCITY = 3 #set velocity
 ##MOB_BOSS_VELOCITY = 1
 PROJECTILE_VELOCITY = 4 # set velocity for projectiles
-MAX_PROJECTILE = 25 # ammo amount
+MAX_PROJECTILE = 3 # ammo amount
 
 BAKER_WIDTH, BAKER_HEIGHT = 64, 64
 MOB_BOSS_WIDTH, MOB_BOSS_HEIGHT = 64, 64
@@ -177,9 +177,6 @@ def main():
                 vel_y = random.randrange(-1, 2)
             print(vel_x)
             print(vel_y)
-
-
-       
 
         for event in pygame.event.get(): # check for close game
             if event.type == pygame.QUIT: #if click windows X close button
