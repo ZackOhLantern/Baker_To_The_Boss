@@ -22,7 +22,7 @@ BORDER = pygame.Rect(WIDTH, HEIGHT, 10, 10) # draws a long thin rectangle... not
 MAIL_HIT_SOUND = pygame.mixer.Sound(os.path.join('Assets', 'mail_hit.mp3'))
 MAIL_THROW_SOUND = pygame.mixer.Sound(os.path.join('Assets', 'mail_throw.mp3'))
 
-HEALTH_FONT = pygame.font.SysFont('fraktur', 40)
+HEALTH_FONT = pygame.font.SysFont('fraktur', 32)
 WINNER_FONT = pygame.font.SysFont('fraktur', 100)
 
 FPS = 60 #set FPS
@@ -130,8 +130,8 @@ def handle_projectiles(mail_projectiles, baker, mob_boss): #projectile function
         elif mail_bullet.x > WIDTH:
             mail_projectiles.remove(mail_bullet)
 
-INTRO_TEXT_1 = ["A Cursed Family", "Chapter Three", "Baker to the Boss", "There's more to the story of our family...", "but this chapter is easier to stomach than most...", "Jameson was a baker.", "A good one, well-regarded, reasonably priced...", "       SPACE to continue..."]
-INTRO_LINES_1 = [0, 1, 2, 3, 4, 5, 6, 7]
+INTRO_TEXT_1 = ["A Cursed Family", "Chapter Three", "Baker to the Boss", "There's more to the story of our family...", "but this chapter is easier to stomach than most...", "Jameson was a baker.", "A good one, well-regarded, reasonably priced...", " ", " ", "       SPACE to continue..."]
+INTRO_LINES_1 = [0, 1, 2, 3, 4, 5, 6, 7 ,8, 9]
 
 INTRO_TEXT_2 = ["There is a glass case, loaded with cakes,", " immaculately decorated. And donuts, tarts, pies.", "All presented with a keen eye and caring hand.", "On the walls are photos, Jameson with the mayor,", "Jameson standing in front of the bakery the day ", "he purchased it, Jameson and his young son, Andrew,", "Jameson with the first baked good he sold at ", "Jameson's Bakery, Andrew learning to use a whisk,", "Andrew's dog, Otis, eating an entire cake...", "       SPACE to continue..."]
 INTRO_LINES_2 = [0, 1, 2, 3, 4, 5, 6, 7 ,8, 9]
@@ -142,7 +142,7 @@ INTRO_LINES_3 = [0, 1, 2, 3, 4, 5, 6, 7 ,8, 9]
 INTRO_TEXT_4 = ["'I'm quite proud of my cakes, yes. I don't know about ", "the best, but I think they're quite good.'", "'My boss, see, he wants some cakes. But small-like, see'", "'Small... cakes. Bundt cakes?'", "'Smaller.'", "'Oh, I see. Pound cakes.'", "'Smaller!' The ruffian clenches his fist and raises it threateningly'", "'Hmm...'", "Ain't youse gawt some koinda cookie cuttas er sum'n'?", "       SPACE to continue..."]
 INTRO_LINES_4 = [0, 1, 2, 3, 4, 5, 6, 7 ,8, 9]
 
-INTRO_TEXT_5 = ["'Yes, of course. But I think what your boss is looking", " for is something that was always meant to be small,", "not a normal cake cut into smaller cakes, right?", "'Gawtta be hand held. Sweet. It's fer his dawta's tenth", "boithday, see? Can't nuttin' mess that up or ye'll be", "sleepin' wit' da fishes. Comprondor?'", "'...Yes?'", "'Gewd. All be back in a hwhile. If ye ain't gawtGewd. All be back in a hwhile. If ye ain't gawt", "twenty-five itty-bitty hand cakes, ye's gawta sing", "       SPACE to continue..."]
+INTRO_TEXT_5 = ["'Yes, of course. But I think what your boss is looking", " for is something that was always meant to be small,", "not a normal cake cut into smaller cakes, right?", "'Gawtta be hand held. Sweet. It's fer his dawta's tenth", "boithday, see? Can't nuttin' mess that up or ye'll be", "sleepin' wit' da fishes. Comprondor?'", "'...Yes?'", "'Gewd. All be back in a hwhile. If ye ain't gawt", "twenty-five itty-bitty hand cakes, ye's gawta sing", "       SPACE to continue..."]
 INTRO_LINES_5 = [0, 1, 2, 3, 4, 5, 6, 7 ,8, 9]
 
 INTRO_TEXT_6 = ["da happy birfday song to his datta. Ova an' ova. Once", "fer each time ya din make a cake but shoulda.", "An' if yaw don'?' He raises his fist again.", "'I'z weal deck yer head clean off aye well.'", "The ruffian with an oddly shifting accent turns", "on his heel and leaves.", "The ruffian and his boss thought they invented", "cupcakes that day, but it was really Jameson. ", "He begins feverishly theory-crafting, prototyping,", "       SPACE to continue..."]
@@ -150,6 +150,9 @@ INTRO_LINES_6 = [0, 1, 2, 3, 4, 5, 6, 7 ,8, 9]
 
 INTRO_TEXT_7 = ["and baking. Eventually, he finds his process, and using", "ramekins and pieces of parchment carefully cut into fluted circles, he", "begins the desperate task of saving his own life.", "Mercifully, when the ruffian returns, he knows it couldn't", "possibly have been enough time. Mercilessly, he", "returns with yet more instructions. Fortunately, Jameson has ", "anticipated this and prepared a batch of generic batter", "which he can flavor in many ways. Unfortunately,", "the ruffian is impatient and demanding in equal measure.", "       SPACE to continue..."]
 INTRO_LINES_7 = [0, 1, 2, 3, 4, 5, 6, 7 ,8, 9]
+
+INTRO_TEXT_8 = ["THROW 25 CUPCAKES AT THE RUFFIAN TO WIN!", "THE RUFFIAN WILL SPEED UP AS TIME CONTINUES!", "PRESS SPACE TO THROW CUPCAKES!", "W A S D TO MOVE THE BAKER!", " ", " ", " ", " ", " ", "       SPACE to continue..."]
+INTRO_LINES_8 = [0, 1, 2, 3, 4, 5, 6, 7 ,8, 9]
 
 def draw_intro_1(text, line):
     draw_text = HEALTH_FONT.render(text, 1, WHITE)
@@ -198,7 +201,6 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    print("WTF")
                     reloop = 2
     
     #intro_timer = pygame.time.get_ticks() 
@@ -222,7 +224,6 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    print("WTF")
                     reloop = 2
 
     WIN.fill(BLACK)
@@ -234,7 +235,6 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    print("WTF")
                     reloop = 2
 
     WIN.fill(BLACK)
@@ -246,7 +246,6 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    print("WTF")
                     reloop = 2
 
     WIN.fill(BLACK)
@@ -258,7 +257,6 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    print("WTF")
                     reloop = 2
 
     WIN.fill(BLACK)
@@ -270,7 +268,6 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    print("WTF")
                     reloop = 2
 
     WIN.fill(BLACK)
@@ -282,7 +279,17 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    print("WTF")
+                    reloop = 2
+
+    WIN.fill(BLACK)
+    reloop = 1
+    while reloop == 1:
+
+        for i in INTRO_LINES_8:
+            draw_intro_1(INTRO_TEXT_8[i], i)
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
                     reloop = 2
 
 
